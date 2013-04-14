@@ -13,12 +13,12 @@
 		<repository>
 			<id>maven.nsisc.com</id>
 			<name>Internal Releases</name>
-			<url>http://64.186.145.31:8081/nexus/content/repositories/releases/</url>
+			<url>http://80.69.77.90:8081/nexus/content/repositories/releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>maven.nsisc.com</id>
 			<name>Internal Releases</name>
-			<url>http://64.186.145.31:8081/nexus/content/repositories/snapshots/</url>
+			<url>http://80.69.77.90:8081/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 	
@@ -26,7 +26,7 @@
 		<repository>
 			<id>maven.nsisc.com</id>
 			<name>NSISC Maven Repository</name>
-			<url>http://64.186.145.31:8081/nexus/content/groups/public</url>
+			<url>http://80.69.77.90:8081/nexus/content/groups/public</url>
 		</repository>
 		<repository>
 			<id>maven.jahia.org</id>
