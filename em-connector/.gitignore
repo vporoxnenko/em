@@ -1,0 +1,7 @@
+.settings
+target
+*.class
+.project
+.classpath
+*.*~
+.svn
