@@ -9,16 +9,20 @@
 	<packaging>pom</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 
+	<properties>
+		<nexus.nsisc.url>http://80.69.77.90:8082</nexus.nsisc.url>
+	</properties>
+	
 	<distributionManagement>
 		<repository>
 			<id>maven.nsisc.com</id>
 			<name>Internal Releases</name>
-			<url>http://80.69.77.90:8081/nexus/content/repositories/releases/</url>
+			<url>${nexus.nsisc.url}/nexus/content/repositories/releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>maven.nsisc.com</id>
 			<name>Internal Releases</name>
-			<url>http://80.69.77.90:8081/nexus/content/repositories/snapshots/</url>
+			<url>${nexus.nsisc.url}/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 	
@@ -26,7 +30,7 @@
 		<repository>
 			<id>maven.nsisc.com</id>
 			<name>NSISC Maven Repository</name>
-			<url>http://80.69.77.90:8081/nexus/content/groups/public</url>
+			<url>${nexus.nsisc.url}/nexus/content/groups/public</url>
 		</repository>
 		<repository>
 			<id>maven.jahia.org</id>
