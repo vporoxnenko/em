@@ -10,8 +10,8 @@
 	<version>1.0.0-SNAPSHOT</version>
 
 	<properties>
--		<nexus.nsisc.url>http://80.69.77.90:8082</nexus.nsisc.url>
--	</properties>
+		<nexus.nsisc.url>http://80.69.77.90:8082</nexus.nsisc.url>
+	</properties>
 
 	<distributionManagement>
 		<repository>
