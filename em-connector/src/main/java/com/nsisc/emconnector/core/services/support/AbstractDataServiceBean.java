@@ -35,7 +35,7 @@ public abstract class AbstractDataServiceBean<K extends Serializable, T extends 
 
 	public List<T> findAll() {
 		return executeQuery(getEntityClass(), String.format(SELECT_ALL_PATTERN,
-				getEntityClass().getSimpleName()));
+				getEntityClass().getName()));
 	}
 
 	public List<T> findByProperty(String propertyName, Object value) {
