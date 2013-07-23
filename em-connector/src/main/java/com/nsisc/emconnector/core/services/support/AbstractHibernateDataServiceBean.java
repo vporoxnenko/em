@@ -88,11 +88,12 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 		}
 	}
 
-	protected Query createParamQuery(String queryString, Object[] params) {
+	@Override
+	protected Query createParamQuery(String queryString, Object... params) {
 		try {
 			Query result = getSession().createQuery(queryString);
-			for (int i = 1; i <= params.length; i++) {
-				result.setParameter(i, params[i - 1]);
+			for (int i = 0; i < params.length; i++) {
+				result.setParameter(i, params[i]);
 			}
 			return result;
 		} catch (Exception e) {
@@ -207,9 +208,9 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 		}
 	}
 
-	private Session getSession(){
+	public Session getSession(){
 		return getSessionFactory().getCurrentSession();
 	}
 	
-	public abstract SessionFactory getSessionFactory();
+	protected abstract SessionFactory getSessionFactory();
 }

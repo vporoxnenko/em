@@ -54,5 +54,5 @@ public abstract class AbstractDataServiceBean<K extends Serializable, T extends 
 		return Logger.getLogger(getEntityClass().getName());
 	}
 
-	protected abstract Q createParamQuery(String queryString, Object[] params);
+	protected abstract Q createParamQuery(String queryString, Object... params);
 }

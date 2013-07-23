@@ -66,7 +66,8 @@ public abstract class AbstractJPADataServiceBean<K extends Serializable, T exten
 		}
 	}
 
-	protected Query createParamQuery(String queryString, Object[] params) {
+	@Override
+	protected Query createParamQuery(String queryString, Object... params) {
 		try {
 			Query result = getEntityManager().createQuery(queryString);
 			for (int i = 1; i <= params.length; i++) {
