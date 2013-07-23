@@ -22,10 +22,10 @@ public abstract class AbstractPersistentObject<K extends Serializable>
 
 	private K id;
 
+	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "Id")
-	@Override
+	@Column(name = "id")
 	public K getPrimaryKey() {
 		return this.id;
 	}
@@ -60,9 +60,13 @@ public abstract class AbstractPersistentObject<K extends Serializable>
 	 */
 	@Override
 	public int hashCode() {
-		if (getPrimaryKey() instanceof Number)
-			return ((Number) getPrimaryKey()).intValue();
-		else
-			return getPrimaryKey().hashCode();
+		if (id != null) {
+			if (id instanceof Number)
+				return ((Number) getPrimaryKey()).intValue();
+			else
+				return id.hashCode();
+		} else {
+			return 0;
+		}
 	}
 }
