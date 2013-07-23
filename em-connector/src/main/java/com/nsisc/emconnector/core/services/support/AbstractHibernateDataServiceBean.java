@@ -23,6 +23,7 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 	public T findById(K id) {
 		try {
 			getSession().beginTransaction();
+			@SuppressWarnings("unchecked")
 			T result = (T) getSession().load(getEntityClass(), id);
 			getSession().getTransaction().commit();
 			return result;
@@ -79,6 +80,7 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 	public T merge(T object) {
 		try {
 			getSession().beginTransaction();
+			@SuppressWarnings("unchecked")
 			T result = (T) getSession().merge(object);
 			getSession().getTransaction().commit();
 			return result;
