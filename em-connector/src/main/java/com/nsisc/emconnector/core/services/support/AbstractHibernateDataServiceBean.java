@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.nsisc.emconnector.core.exceptions.ApplicationException;
+import com.nsisc.emconnector.core.filter.Filter;
 import com.nsisc.emconnector.model.PersistentObject;
 
 /**
@@ -213,6 +214,21 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 	public Session getSession(){
 		return getSessionFactory().getCurrentSession();
 	}
+
+	@Override
+	public <R extends PersistentObject<K>> List<R> executeQuery(
+			Class<R> resultClass, Filter<?, ?> filter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <R extends PersistentObject<K>> R executeSingleResultQuery(
+			Class<R> resultClass, Filter<?, ?> filter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	protected abstract SessionFactory getSessionFactory();
+
 }
