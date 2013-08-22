@@ -25,7 +25,7 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 		try {
 			getSession().beginTransaction();
 			@SuppressWarnings("unchecked")
-			T result = (T) getSession().load(getEntityClass(), id);
+			T result = (T) getSession().get(getEntityClass(), id);
 			getSession().getTransaction().commit();
 			return result;
 		} catch (Exception e) {
