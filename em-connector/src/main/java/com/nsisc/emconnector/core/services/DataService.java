@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.nsisc.emconnector.core.filter.Filter;
 import com.nsisc.emconnector.model.PersistentObject;
 
 
@@ -162,27 +161,6 @@ public interface DataService<K extends Serializable, T extends PersistentObject<
 	 * @return
 	 */
 	<R extends PersistentObject<K>> R executeSingleResultParamQuery(Class<R> resultClass,String queryString, Object... params);
-	
-	/**
-	 * Run SELECT query
-	 * 
-	 * @param filter
-	 * @param resultClass
-	 * 
-	 * @return
-	 */
-	<R extends PersistentObject<K>> List<R> executeQuery(Class<R> resultClass, Filter<?,?> filter);
-	
-	/**
-	 * Run SELECT query with single returned result
-	 * 
-	 * @param filter
-	 * @param resultClass
-	 * 
-	 * @return
-	 */
-	<R extends PersistentObject<K>> R executeSingleResultQuery(Class<R> resultClass,Filter<?,?> filter);
-	
 	
 	Logger getLogger();
 }
