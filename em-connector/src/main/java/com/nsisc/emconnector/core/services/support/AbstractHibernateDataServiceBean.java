@@ -18,77 +18,36 @@ import com.nsisc.emconnector.model.PersistentObject;
  * 
  * @author Valentin A. Poroxnenko
  */
-public abstract class AbstractHibernateDataServiceBean<K extends Serializable, T extends PersistentObject<K>> 
-extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
-	
+public abstract class AbstractHibernateDataServiceBean<K extends Serializable, T extends PersistentObject<K>>
+		extends AbstractDataServiceBean<K, T, org.hibernate.Query> {
+
 	public T findById(K id) {
-		try {
-			getSession().beginTransaction();
-			@SuppressWarnings("unchecked")
-			T result = (T) getSession().get(getEntityClass(), id);
-			getSession().getTransaction().commit();
-			return result;
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		@SuppressWarnings("unchecked")
+		T result = (T) getSession().get(getEntityClass(), id);
+		getSession().getTransaction().commit();
+		return result;
 	}
 
 	public void save(T object) {
-		try {
-			getSession().beginTransaction();
-			getSession().persist(object);
-			getSession().getTransaction().commit();
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		getSession().persist(object);
 	}
 
 	public void update(T object) {
-		try {
-			getSession().beginTransaction();
-			getSession().refresh(object);
-			getSession().getTransaction().commit();
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		getSession().refresh(object);
 	}
 
 	public void remove(T object) {
-		try {
-			getSession().beginTransaction();
-			getSession().delete(object);
-			getSession().getTransaction().commit();
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		getSession().delete(object);
 	}
 
 	public void removeById(K id) {
-		try {
-			getSession().beginTransaction();
-			getSession().delete(findById(id));
-			getSession().getTransaction().commit();
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		getSession().delete(findById(id));
 	}
 
 	public T merge(T object) {
-		try {
-			getSession().beginTransaction();
-			@SuppressWarnings("unchecked")
-			T result = (T) getSession().merge(object);
-			getSession().getTransaction().commit();
-			return result;
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		@SuppressWarnings("unchecked")
+		T result = (T) getSession().merge(object);
+		return result;
 	}
 
 	@Override
@@ -107,7 +66,7 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 	public boolean isObjectInContext(T object) {
 		try {
 			getSession().beginTransaction();
-			boolean result = getSession().contains(object); 
+			boolean result = getSession().contains(object);
 			getSession().getTransaction().commit();
 			return result;
 		} catch (Exception e) {
@@ -120,7 +79,7 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 		try {
 			getSession().beginTransaction();
 			Query query = getSession().createQuery(queryString);
-			int result = query.executeUpdate(); 
+			int result = query.executeUpdate();
 			getSession().getTransaction().commit();
 			return result;
 		} catch (Exception e) {
@@ -136,7 +95,7 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 			for (int i = 1; i <= params.length; i++) {
 				query.setParameter(i, params[i - 1]);
 			}
-			int result = query.executeUpdate(); 
+			int result = query.executeUpdate();
 			getSession().getTransaction().commit();
 			return result;
 		} catch (Exception e) {
@@ -150,8 +109,8 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 			Class<R> resultClass, String queryString) {
 		try {
 			getSession().beginTransaction();
-			List<R> result = (List<R>) getSession().createQuery(
-					queryString).list();
+			List<R> result = (List<R>) getSession().createQuery(queryString)
+					.list();
 			getSession().getTransaction().commit();
 			return result;
 		} catch (Exception e) {
@@ -180,8 +139,7 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 			Class<R> resultClass, String queryString) {
 		try {
 			getSession().beginTransaction();
-			R result = (R) getSession().createQuery(queryString)
-					.uniqueResult(); 
+			R result = (R) getSession().createQuery(queryString).uniqueResult();
 			getSession().getTransaction().commit();
 			return result;
 		} catch (NoResultException e) {
@@ -198,8 +156,7 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 			Class<R> resultClass, String queryString, Object... params) {
 		try {
 			getSession().beginTransaction();
-			R result = (R) createParamQuery(queryString, params)
-					.uniqueResult(); 
+			R result = (R) createParamQuery(queryString, params).uniqueResult();
 			getSession().getTransaction().commit();
 			return result;
 		} catch (NoResultException e) {
@@ -211,7 +168,7 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 		}
 	}
 
-	public Session getSession(){
+	public Session getSession() {
 		return getSessionFactory().getCurrentSession();
 	}
 
@@ -228,7 +185,7 @@ extends AbstractDataServiceBean<K, T, org.hibernate.Query>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	protected abstract SessionFactory getSessionFactory();
 
 }
