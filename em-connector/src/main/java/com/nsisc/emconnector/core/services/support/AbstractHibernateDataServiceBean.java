@@ -3,13 +3,10 @@ package com.nsisc.emconnector.core.services.support;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.NoResultException;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.nsisc.emconnector.core.exceptions.ApplicationException;
 import com.nsisc.emconnector.model.PersistentObject;
 
 /**
@@ -23,7 +20,7 @@ public abstract class AbstractHibernateDataServiceBean<K extends Serializable, T
 	public T findById(K id) {
 		@SuppressWarnings("unchecked")
 		T result = (T) getSession().get(getEntityClass(), id);
-		getSession().getTransaction().commit();
+
 		return result;
 	}
 
@@ -43,128 +40,59 @@ public abstract class AbstractHibernateDataServiceBean<K extends Serializable, T
 		getSession().delete(findById(id));
 	}
 
+	@SuppressWarnings("unchecked")
 	public T merge(T object) {
-		@SuppressWarnings("unchecked")
-		T result = (T) getSession().merge(object);
-		return result;
+		return (T) getSession().merge(object);
 	}
 
 	@Override
 	protected Query createParamQuery(String queryString, Object... params) {
-		try {
-			Query result = getSession().createQuery(queryString);
-			for (int i = 0; i < params.length; i++) {
-				result.setParameter(i, params[i]);
-			}
-			return result;
-		} catch (Exception e) {
-			throw new ApplicationException(e);
+		Query result = getSession().createQuery(queryString);
+		for (int i = 0; i < params.length; i++) {
+			result.setParameter(i, params[i]);
 		}
+		return result;
 	}
 
 	public boolean isObjectInContext(T object) {
-		try {
-			getSession().beginTransaction();
-			boolean result = getSession().contains(object);
-			getSession().getTransaction().commit();
-			return result;
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		return getSession().contains(object);
 	}
 
 	public int executeUpdate(String queryString) {
-		try {
-			getSession().beginTransaction();
-			Query query = getSession().createQuery(queryString);
-			int result = query.executeUpdate();
-			getSession().getTransaction().commit();
-			return result;
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		Query query = getSession().createQuery(queryString);
+		return query.executeUpdate();
 	}
 
 	public int executeParamUpdate(String queryString, Object... params) {
-		try {
-			getSession().beginTransaction();
-			Query query = getSession().createQuery(queryString);
-			for (int i = 1; i <= params.length; i++) {
-				query.setParameter(i, params[i - 1]);
-			}
-			int result = query.executeUpdate();
-			getSession().getTransaction().commit();
-			return result;
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
+		Query query = getSession().createQuery(queryString);
+		for (int i = 1; i <= params.length; i++) {
+			query.setParameter(i, params[i - 1]);
 		}
+		return query.executeUpdate();
 	}
 
 	@SuppressWarnings("unchecked")
 	public <R extends PersistentObject<K>> List<R> executeQuery(
 			Class<R> resultClass, String queryString) {
-		try {
-			getSession().beginTransaction();
-			List<R> result = (List<R>) getSession().createQuery(queryString)
-					.list();
-			getSession().getTransaction().commit();
-			return result;
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		return (List<R>) getSession().createQuery(queryString).list();
 	}
 
 	@SuppressWarnings("unchecked")
 	public <R extends PersistentObject<K>> List<R> executeParamQuery(
 			Class<R> resultClass, String queryString, Object... params) {
-		try {
-			getSession().beginTransaction();
-			List<R> result = (List<R>) createParamQuery(queryString, params)
-					.list();
-			getSession().getTransaction().commit();
-			return result;
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		return (List<R>) createParamQuery(queryString, params).list();
 	}
 
 	@SuppressWarnings("unchecked")
 	public <R extends PersistentObject<K>> R executeSingleResultQuery(
 			Class<R> resultClass, String queryString) {
-		try {
-			getSession().beginTransaction();
-			R result = (R) getSession().createQuery(queryString).uniqueResult();
-			getSession().getTransaction().commit();
-			return result;
-		} catch (NoResultException e) {
-			getSession().getTransaction().rollback();
-			return null;
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		return (R) getSession().createQuery(queryString).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
 	public <R extends PersistentObject<K>> R executeSingleResultParamQuery(
 			Class<R> resultClass, String queryString, Object... params) {
-		try {
-			getSession().beginTransaction();
-			R result = (R) createParamQuery(queryString, params).uniqueResult();
-			getSession().getTransaction().commit();
-			return result;
-		} catch (NoResultException e) {
-			getSession().getTransaction().rollback();
-			return null;
-		} catch (Exception e) {
-			getSession().getTransaction().rollback();
-			throw new ApplicationException(e);
-		}
+		return (R) createParamQuery(queryString, params).uniqueResult();
 	}
 
 	public Session getSession() {
