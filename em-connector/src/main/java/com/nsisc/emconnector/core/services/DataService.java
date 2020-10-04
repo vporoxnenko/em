@@ -1,14 +1,12 @@
 package com.nsisc.emconnector.core.services;
 
 
+import com.nsisc.emconnector.model.PersistentObject;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Logger;
-
-import com.nsisc.emconnector.model.PersistentObject;
 
 
-public interface DataService<K extends Serializable, T extends PersistentObject<K>> extends ActionService{
+public interface DataService<K extends Serializable, T extends PersistentObject<K>>{
 
 	
 	Class<T> getEntityClass();
@@ -98,7 +96,7 @@ public interface DataService<K extends Serializable, T extends PersistentObject<
 	
 	/**
 	 * 
-	 * @param object
+	 * @param entity
 	 * @return
 	 */
 	boolean isObjectInContext(T entity);
@@ -161,6 +159,5 @@ public interface DataService<K extends Serializable, T extends PersistentObject<
 	 * @return
 	 */
 	<R extends PersistentObject<K>> R executeSingleResultParamQuery(Class<R> resultClass,String queryString, Object... params);
-	
-	Logger getLogger();
+
 }

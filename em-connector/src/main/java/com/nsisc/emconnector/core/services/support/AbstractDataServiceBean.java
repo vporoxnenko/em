@@ -1,12 +1,10 @@
 package com.nsisc.emconnector.core.services.support;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.logging.Logger;
-
 import com.nsisc.emconnector.core.exceptions.ApplicationException;
 import com.nsisc.emconnector.core.services.DataService;
 import com.nsisc.emconnector.model.PersistentObject;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Abstract parent to work with entity manage services
@@ -21,7 +19,7 @@ public abstract class AbstractDataServiceBean<K extends Serializable, T extends 
 
 	public T initEntity() {
 		try {
-			return getEntityClass().newInstance();
+			return getEntityClass().getDeclaredConstructor().newInstance();
 		} catch (InstantiationException e) {
 			throw new ApplicationException("Couldn't instantiate entity "
 					+ getEntityClass(), e.getCause());
@@ -48,10 +46,6 @@ public abstract class AbstractDataServiceBean<K extends Serializable, T extends 
 		return executeSingleResultParamQuery(getEntityClass(), String.format(
 				SELECT_BY_PROPERTY_PATTERN, getEntityClass().getSimpleName(),
 				propertyName), value);
-	}
-
-	public Logger getLogger() {
-		return Logger.getLogger(getEntityClass().getName());
 	}
 
 	protected abstract Q createParamQuery(String queryString, Object... params);
