@@ -15,7 +15,7 @@ public abstract class VersionedEntity {
     public static final String VERSION_COLUMN_NAME = "version";
 
     @Column(name = CREATED_COLUMN_NAME)
-    private Instant createdUtc;
+    private final Instant createdUtc = Instant.now();
 
     @Column(name = CREATED_COLUMN_NAME)
     private Instant updatedUtc;

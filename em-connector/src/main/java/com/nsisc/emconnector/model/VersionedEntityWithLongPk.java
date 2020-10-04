@@ -12,5 +12,5 @@ import lombok.Data;
 public abstract class VersionedEntityWithLongPk extends AbstractEntity<Long> {
 
     @Embedded
-    private VersionedEntity versionedEntity;
+    private VersionedEntity versionInfo;
 }
