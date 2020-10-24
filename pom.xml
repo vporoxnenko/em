@@ -5,13 +5,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.vporoxnenko</groupId>
-  <artifactId>entity-connector</artifactId>
+  <artifactId>entity-manager</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0-SNAPSHOT</version>
 
-  <name>Entity connector</name>
+  <name>Entity manager</name>
   <description>Lightweight tool to create CRUD+ services and manage database entities</description>
-  <url>https://github.com/vporoxnenko/em-connector</url>
+  <url>https://github.com/vporoxnenko/em</url>
 
   <licenses>
     <license>
@@ -22,7 +22,7 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/vporoxnenko/em-connector.git</url>
+    <url>https://github.com/vporoxnenko/em.git</url>
   </scm>
 
   <build>
