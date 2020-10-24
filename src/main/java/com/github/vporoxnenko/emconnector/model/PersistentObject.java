@@ -1,4 +1,4 @@
-package com.nsisc.emconnector.model;
+package com.github.vporoxnenko.emconnector.model;
 
 import java.io.Serializable;
 
@@ -14,11 +14,11 @@ public interface PersistentObject<K extends Serializable> extends Serializable{
 	 * 
 	 * @return primary key
 	 */
-	K getPrimaryKey();
+	K getId();
 
 	/**
 	 * 
 	 * @param id primary key
 	 */
-	void setPrimaryKey(K id);
+	void setId(K id);
 }

@@ -1,13 +1,12 @@
-package com.nsisc.emconnector.core.services.support;
+package com.github.vporoxnenko.emconnector.core.services.support;
 
+import com.github.vporoxnenko.emconnector.model.PersistentObject;
 import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import com.nsisc.emconnector.model.PersistentObject;
 
 /**
  * Abstract parent to work with entity manage services

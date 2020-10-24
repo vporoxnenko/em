@@ -1,4 +1,4 @@
-package com.nsisc.emconnector.model;
+package com.github.vporoxnenko.emconnector.model;
 
 import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
