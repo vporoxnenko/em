@@ -13,6 +13,15 @@
   <description>Lightweight tool to create CRUD+ services and manage database entities</description>
   <url>https://github.com/vporoxnenko/em</url>
 
+  <developers>
+    <developer>
+      <name>Valentin A. Poroxnenko</name>
+      <email>valentin.poroxnenko@gmail.com</email>
+      <organization>TalkingBread</organization>
+      <organizationUrl>https://github.com/vporoxnenko</organizationUrl>
+    </developer>
+  </developers>
+
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -22,7 +31,9 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/vporoxnenko/em.git</url>
+    <connection>scm:git:git://github.com/simpligility/vporoxnenko/em.git</connection>
+    <developerConnection>scm:git:ssh://github.com:vporoxnenko/em.git</developerConnection>
+    <url>http://github.com/vporoxnenko/em/tree/master</url>
   </scm>
 
   <build>
@@ -42,6 +53,46 @@
         <configuration>
           <encoding>UTF-8</encoding>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.6</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
