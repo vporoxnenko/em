@@ -47,16 +47,17 @@
   </build>
 
   <distributionManagement>
-    <repository>
+    <snapshotRepository>
       <id>sonatype</id>
       <name>Snapshots</name>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-    <snapshotRepository>
+    </snapshotRepository>
+    <repository>
       <id>sonatype</id>
       <name>Internal Releases</name>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-    </snapshotRepository>
+    </repository>
+
   </distributionManagement>
 
   <dependencies>
